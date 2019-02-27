@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program for Text to Audio &mdash; Weatherbot 1.0.a documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Getting the Weather status from the API" href="weather_status.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Weatherbot
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Steps in buliding the weatherbot:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Packages used in weatherbot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_audio.html">Record the voice from the user</a></li>
+<li class="toctree-l1"><a class="reference internal" href="audio_to_text.html">Convert the Audio to Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_woeid_cityname.html">Getting the WOEID for the mentioned city</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather_status.html">Getting the Weather status from the API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Program for Text to Audio</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Weatherbot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Program for Text to Audio</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rst_files/text_to_audio.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-for-text-to-audio">
+<h1>Program for Text to Audio<a class="headerlink" href="#program-for-text-to-audio" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">city_name</span> <span class="o">=</span> <span class="n">Audio_to_text</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
+<span class="n">weather_type</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">get_woeid</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">gtts</span> <span class="kn">import</span> <span class="n">gTTS</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">playsound</span> <span class="kn">import</span> <span class="n">playsound</span>
+
+
+<span class="n">my_variable</span> <span class="o">=</span> <span class="s2">&quot;the weather in {} is {} with a temperature of {} degrees&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">city_name</span><span class="p">,</span><span class="n">weather_type</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span>
+<span class="c1"># import pyttsx3</span>
+
+<span class="c1"># engine = pyttsx3.init()</span>
+<span class="c1"># engine.say(my_variable)</span>
+<span class="k">def</span> <span class="nf">tts_audio_saver</span><span class="p">(</span><span class="n">my_variable</span><span class="p">):</span>
+     <span class="n">tts</span> <span class="o">=</span> <span class="n">gTTS</span><span class="p">(</span><span class="n">my_variable</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">)</span>
+     <span class="n">tts</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;MusicFile.mp3&quot;</span><span class="p">)</span>
+     <span class="k">return</span> <span class="n">playsound</span><span class="p">(</span><span class="s1">&#39;MusicFile.mp3&#39;</span><span class="p">)</span>
+
+
+<span class="n">tts_audio_saver</span><span class="p">(</span><span class="n">my_variable</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="weather_status.html" class="btn btn-neutral float-left" title="Getting the Weather status from the API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Pyla Raja Mohan Rao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
